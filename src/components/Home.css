@@ -42,3 +42,45 @@ form {
   a:hover {
     text-decoration: underline;
   }
+  /* Set the height of the slider container */
+.slider {
+  height: 400px;
+}
+
+/* Set the width and height of the slides */
+.slider .slick-slide {
+  width: 200px;
+  height: 300px;
+}
+
+/* Add some margins around each slide */
+.slider .slick-slide {
+  margin: 0 10px;
+}
+
+/* Change the background color of the slides */
+.slider .slick-slide {
+  background-color: #f1f1f1;
+}
+
+/* Customize the arrow buttons */
+.slider .slick-prev,
+.slider .slick-next {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+/* Change the position of the arrow buttons */
+.slider .slick-prev {
+  left: 10px;
+}
+
+.slider .slick-next {
+  right: 10px;
+}
