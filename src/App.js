@@ -16,7 +16,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/anime/:id" component={AnimeDetails} />
         <Route path="/WatchListPage" component={Watchlist} />
-        <Route exact path="/Filters" component={Filter} />
+        <Route path="/Filters" component={Filter} />
         <Route path="/genre/:genreId" component={GenreAnimeList} />
       </Switch>
     </Router>
