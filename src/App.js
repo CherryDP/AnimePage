@@ -5,6 +5,7 @@ import AnimeDetails from './components/AnimeDetailsPage';
 import Watchlist from './components/WatchlistPage';
 import Header from './components/NavigationPage';
 import Filter from './components/Filters';
+import GenreAnimeList from './components/Genre';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/anime/:id" component={AnimeDetails} />
         <Route path="/WatchListPage" component={Watchlist} />
         <Route exact path="/Filters" component={Filter} />
+        <Route path="/genre/:genreId" component={GenreAnimeList} />
       </Switch>
     </Router>
   );

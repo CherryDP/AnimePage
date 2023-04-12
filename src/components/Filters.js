@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import "./Filter.css";
 
 const Filter = () => {
   const [genres, setGenres] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const history = useHistory();
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -17,34 +16,22 @@ const Filter = () => {
     fetchGenres();
   }, []);
 
-  const handleSelectChange = (event) => {
-    setSelectedGenre(event.target.value);
-  };
-
-  const handleAnimeClick = (animeId) => {
-    history.push(`/anime/${animeId}`);
+  const generateColor = () => {
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    return "#" + randomColor;
   };
 
   return (
-    <div>
-      <select value={selectedGenre} onChange={handleSelectChange}>
-        <option value="">Select a genre</option>
-        {genres.map((genre) => (
-          <option key={genre.id} value={genre.id}>
-            {genre.attributes.name}
-          </option>
-        ))}
-      </select>
-      <ul>
-        {selectedGenre &&
-          genres.find((genre) => genre.id === selectedGenre).relationships.anime.data.map(
-            (anime) => (
-              <li key={anime.id} onClick={() => handleAnimeClick(anime.id)}>
-                {anime.attributes.titles.en_jp}
-              </li>
-            )
-          )}
-      </ul>
+    <div className="grid-container">
+      {genres.map((genre) => (
+        <Link
+          key={genre.id}
+          to={`/genre/${genre.id}`}
+          style={{ color: generateColor() }}
+        >
+          {genre.attributes.name}
+        </Link>
+      ))}
     </div>
   );
 };

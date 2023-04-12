@@ -49,7 +49,7 @@ const Header = () => {
           </li>
           <li>
             <Link to="/Filters" onClick={handleLinkClick}>
-              Filters
+              <FaTimes/>Filters
             </Link>
           </li>
         </ul>
