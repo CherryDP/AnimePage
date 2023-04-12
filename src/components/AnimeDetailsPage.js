@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "./AnimeDetail.css";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const AnimeDetails = () => {
   }
 
   return (
-    <div>
+    <div className="anime-details">
       <h1>{anime.attributes.titles.en_jp}</h1>
       <img src={anime.attributes.posterImage.original} alt={anime.attributes.titles.en_jp} />
       <div>

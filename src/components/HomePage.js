@@ -6,8 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Home.css";
 
 const Home = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+
   const [trending, setTrending] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
 
@@ -69,34 +68,10 @@ const Home = () => {
     ],
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(
-        `https://kitsu.io/api/edge/anime?filter[text]=${searchQuery}&page[limit]=10`
-      );
-      setSearchResults(response.data.data);
-    } catch (error) {
-      console.error("Error searching for anime:", error);
-    }
-  };
 
   return (
     <div className="container">
-      <form onSubmit={handleSearch}>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search for anime"
-          />
-          <button type="submit" className="btn btn-outline-secondary">
-            Search
-          </button>
-        </div>
-      </form>
+      
       <div className="row">
         <div className="col-sm-6">
           <div className="card">
@@ -139,26 +114,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {searchResults.length > 0 && (
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="card">
-              <div className="card-header">
-                <h2>Search Results</h2>
-              </div>
-              <ul className="list-group list-group-flush">
-                {searchResults.map((anime) => (
-                  <li key={anime.id} className="list-group-item">
-                    <a href={`/anime/${anime.id}`}>
-                      {anime.attributes.canonicalTitle}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 };

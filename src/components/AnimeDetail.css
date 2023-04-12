@@ -1,0 +1,26 @@
+.anime-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .anime-details img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+
+
+  .anime-details div {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  
+  .anime-details div strong {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+  }
+  
