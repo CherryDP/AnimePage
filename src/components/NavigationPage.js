@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Header.css";
-import { FaHome, FaTimes } from "react-icons/fa";
+import { FaHome, FaTimes,FaReadme } from "react-icons/fa";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -50,6 +50,11 @@ const Header = () => {
           <li>
             <Link to="/Filters" onClick={handleLinkClick}>
               <FaTimes/>Filters
+            </Link>
+          </li>
+          <li>
+            <Link to="/HomePageManga" onClick={handleLinkClick}>
+              <FaReadme /> Manga
             </Link>
           </li>
         </ul>

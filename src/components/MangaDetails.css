@@ -1,0 +1,26 @@
+.manga-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .manga-details img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+
+
+  .manga-details div {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  
+  .manga-details div strong {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+  }
+  
