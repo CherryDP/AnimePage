@@ -6,6 +6,7 @@ import "./AnimeDetail.css";
 const AnimeDetails = () => {
   const { id } = useParams();
   const [anime, setAnime] = useState(null);
+  const [trailer, setTrailer] = useState(null);
 
   useEffect(() => {
     const fetchAnime = async () => {
@@ -13,6 +14,7 @@ const AnimeDetails = () => {
         `https://kitsu.io/api/edge/anime/${id}`
       );
       setAnime(response.data.data);
+      setTrailer(response.data.data.attributes.youtubeVideoId);
     };
     fetchAnime();
   }, [id]);
@@ -40,6 +42,17 @@ const AnimeDetails = () => {
       <div>
         <strong>Synopsis:</strong> {anime.attributes.synopsis}
       </div>
+      {trailer && (
+        <div>
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${trailer}`}
+            title="Trailer"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 };

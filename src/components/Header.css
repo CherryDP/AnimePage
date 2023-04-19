@@ -5,12 +5,14 @@ header {
   align-items: center;
   padding: 1rem;
   position: relative;
+  
 }
 
 /* Navigation menu */
 nav {
   display: flex;
   align-items: center;
+  position: absolute;top: 10px;
 }
 
 .menu-btn {
@@ -73,6 +75,7 @@ nav {
   justify-content: center;
   align-items: center;
   width: 100%;
+  z-index: 1;
 }
 
 .menu.open {
@@ -97,6 +100,13 @@ nav {
 .search-container {
   display: flex;
   align-items: center;
+  float: left;
+  position: absolute;
+  top: 30px;
+  right: 200px;
+  width: 200px;
+  height: 30px;
+  z-index: 9999;
 }
 
 .form-control {
@@ -106,6 +116,7 @@ nav {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 10px;
+  position: relative;
 }
 
 .btn-outline-secondary {
