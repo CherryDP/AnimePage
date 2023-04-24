@@ -27,21 +27,36 @@ const AnimeDetails = () => {
     <div className="anime-details">
       <h1>{anime.attributes.titles.en_jp}</h1>
       <img src={anime.attributes.posterImage.original} alt={anime.attributes.titles.en_jp} />
-      <div>
-        <strong>Type:</strong> {anime.attributes.showType}
-      </div>
-      <div>
-        <strong>Episodes:</strong> {anime.attributes.episodeCount}
-      </div>
-      <div>
-        <strong>Score:</strong> {anime.attributes.averageRating}
-      </div>
-      <div>
-        <strong>Status:</strong> {anime.attributes.status}
-      </div>
-      <div>
-        <strong>Synopsis:</strong> {anime.attributes.synopsis}
-      </div>
+
+      {anime.attributes.showType &&
+        <div>
+          <strong>Type:</strong> {anime.attributes.showType}
+        </div>
+      }
+
+      {anime.attributes.episodeCount &&
+        <div>
+          <strong>Episodes:</strong> {anime.attributes.episodeCount}
+        </div>
+      }
+
+      {anime.attributes.averageRating &&
+        <div>
+          <strong>Score:</strong> {anime.attributes.averageRating}
+        </div>
+      }
+
+      {anime.attributes.status &&
+        <div>
+          <strong>Status:</strong> {anime.attributes.status}
+        </div>
+      }
+
+      {anime.attributes.synopsis &&
+        <div>
+          <strong>Synopsis:</strong> {anime.attributes.synopsis}
+        </div>
+      }
       {trailer && (
         <div>
           <iframe

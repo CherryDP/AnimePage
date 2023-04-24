@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { FaHome, FaTimes,FaReadme } from "react-icons/fa";
+import { FaHome, FaTimes,FaReadme,FaSearch,FaSketch } from "react-icons/fa";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [mangaResults, setMangaResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -25,20 +26,29 @@ const Header = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(
+      const animeResponse = await axios.get(
         `https://kitsu.io/api/edge/anime?filter[text]=${encodeURI(
           searchQuery
-        )}&page[limit]=10`,
+        )}&page[limit]=5`,
         { cancelToken: source.token }
       );
-      setSearchResults(response.data.data);
+      setSearchResults(animeResponse.data.data);
+
+      const mangaResponse = await axios.get(
+        `https://kitsu.io/api/edge/manga?filter[text]=${encodeURI(
+          searchQuery
+        )}&page[limit]=5`,
+        { cancelToken: source.token }
+      );
+      setMangaResults(mangaResponse.data.data);
+
       setIsLoading(false);
       history.push(`/search-results?q=${searchQuery}`);
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log("Request cancelled");
       } else {
-        console.error("Error searching for anime:", error);
+        console.error("Error searching for anime/manga:", error);
       }
     }
   };
@@ -50,6 +60,7 @@ const Header = () => {
       handleSearch({ preventDefault: () => {} });
     } else {
       setSearchResults([]);
+      setMangaResults([]);
       setIsLoading(false);
     }
   }, [searchQuery]);
@@ -78,25 +89,26 @@ const Header = () => {
               <FaReadme /> Manga
             </Link>
           </li>
+          
         </ul>
       </nav>
       <div className="search-container">
+        
         <form onSubmit={handleSearch} className="position-relative">
+        
           <div className="input-group mb-3">
+          
             <input
               type="text"
               className="form-control"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for anime"
+              placeholder="Search for anime" 
             />
-            <button type="submit" className="btn btn-outline-secondary">
-              Search
-            </button>
           </div>
           {searchResults.length > 0 && location.pathname === "/search-results" && (
             <div className="search-results position-absolute w-100 bg-white">
-              <h2>Search Results</h2>
+              <h2><FaSearch/>Search Results</h2>
               <ul className="list-group list-group-flush">
                 {searchResults.map((anime) => (
                   <li key={anime.id} className="list-group-item">

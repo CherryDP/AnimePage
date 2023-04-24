@@ -5,14 +5,21 @@ import "./Filter.css";
 
 const Filter = () => {
   const [genres, setGenres] = useState([]);
+  const [mangaGenres, setMangaGenres] = useState([]);
 
   useEffect(() => {
     const fetchGenres = async () => {
       const response = await axios.get(
-        "https://kitsu.io/api/edge/genres?page[limit]=20"
+        "https://kitsu.io/api/edge/genres?page[limit]=70"
       );
       setGenres(response.data.data);
+
+      const mangaResponse = await axios.get(
+        "https://kitsu.io/api/edge/manga?page[limit]=20"
+      );
+      setMangaGenres(mangaResponse.data.data);
     };
+
     fetchGenres();
   }, []);
 
@@ -22,16 +29,33 @@ const Filter = () => {
   };
 
   return (
-    <div className="grid-container">
-      {genres.map((genre) => (
-        <Link
-          key={genre.id}
-          to={`/genre/${genre.id}`}
-          style={{ color: generateColor() }}
-        >
-          {genre.attributes.name}
-        </Link>
-      ))}
+    <div>
+      <div className="grid-container">
+        <h2>Anime Genres</h2>
+        {genres.map((genre) => (
+          <Link
+            key={genre.attributes.slug}
+            to={`/genre/${genre.attributes.slug}`}
+            style={{ color: generateColor() }}
+          >
+            {genre.attributes.name}
+          </Link>
+        ))}
+      </div>
+          <br></br>
+      <div className="grid-container">
+        <h2>Manga Genres</h2>
+        {mangaGenres.length > 0 &&
+          mangaGenres.map((genre) => (
+            <Link
+              key={genre.id}
+              to={`/manga/genre/${genre.attributes.slug}`}
+              style={{ color: generateColor() }}
+            >
+              {genre.attributes.name}
+            </Link>
+          ))}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "./Genre.css";
 
 const GenreAnimeList = () => {
   const { genreId } = useParams();
@@ -14,6 +16,7 @@ const GenreAnimeList = () => {
         );
         setAnimeList(response.data.data);
         console.log(response.data.data);
+        console.log(genreId)
       } catch (error) {
         console.log(error);
         console.log(error.message);
@@ -24,6 +27,8 @@ const GenreAnimeList = () => {
     };
     fetchAnimeList();
   }, [genreId]);
+  
+
 
   return (
     <div>
@@ -32,11 +37,13 @@ const GenreAnimeList = () => {
         <ul>
           {animeList.map((anime) => (
             <li key={anime.id}>
-              <img
-                src={anime.attributes.posterImage.small}
-                alt={anime.attributes.titles.en}
-              />
-              <div>{anime.attributes.titles.en}</div>
+              <Link to={`/anime/${anime.id}`} >
+                <img
+                  src={anime.attributes.posterImage.small}
+                  alt={anime.attributes.titles.en}
+                />
+              </Link>
+              <p>{anime.attributes.titles.en_jp}</p>
             </li>
           ))}
         </ul>
