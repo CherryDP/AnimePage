@@ -7,7 +7,7 @@ import Filter from './components/Filters';
 import GenreAnimeList from './components/Genre';
 import Home_Manga from './components/HomePageManga';
 import MangaDetails from './components/MangaDetails';
-
+import GenreMangaList from './components/MangaGenre';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/genre/:genreId" component={GenreAnimeList} />
         <Route path="/HomePageManga" component={Home_Manga} />
         <Route path="/manga/:id" component={MangaDetails} />
+        <Route path="/MangaGenre/:genreId" component={GenreMangaList}/>
       </Switch>
     </Router>
   );

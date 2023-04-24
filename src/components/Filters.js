@@ -15,7 +15,7 @@ const Filter = () => {
       setGenres(response.data.data);
 
       const mangaResponse = await axios.get(
-        "https://kitsu.io/api/edge/manga?page[limit]=20"
+        "https://kitsu.io/api/edge/categories?media_type=manga&page[limit]=150"
       );
       setMangaGenres(mangaResponse.data.data);
     };
@@ -42,17 +42,17 @@ const Filter = () => {
           </Link>
         ))}
       </div>
-          <br></br>
+      <br></br>
       <div className="grid-container">
         <h2>Manga Genres</h2>
         {mangaGenres.length > 0 &&
           mangaGenres.map((genre) => (
             <Link
               key={genre.id}
-              to={`/manga/genre/${genre.attributes.slug}`}
+              to={`/MangaGenre/${genre.attributes.slug}`}
               style={{ color: generateColor() }}
             >
-              {genre.attributes.name}
+              {genre.attributes.title}
             </Link>
           ))}
       </div>
