@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { FaHome, FaTimes,FaReadme,FaSearch,FaSketch } from "react-icons/fa";
+import { FaHome, FaTimes,FaReadme,FaSearch } from "react-icons/fa";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -22,6 +22,14 @@ const Header = () => {
   const handleLinkClick = () => {
     setIsMenuOpen(false);
   };
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setSearchResults([]);
+    setMangaResults([]);
+  
+   
+  };
+  
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -29,7 +37,7 @@ const Header = () => {
       const animeResponse = await axios.get(
         `https://kitsu.io/api/edge/anime?filter[text]=${encodeURI(
           searchQuery
-        )}&page[limit]=5`,
+        )}&page[limit]=10`,
         { cancelToken: source.token }
       );
       setSearchResults(animeResponse.data.data);
@@ -37,7 +45,7 @@ const Header = () => {
       const mangaResponse = await axios.get(
         `https://kitsu.io/api/edge/manga?filter[text]=${encodeURI(
           searchQuery
-        )}&page[limit]=5`,
+        )}&page[limit]=10`,
         { cancelToken: source.token }
       );
       setMangaResults(mangaResponse.data.data);
@@ -53,7 +61,7 @@ const Header = () => {
     }
   };
 
-  
+ 
 
   useEffect(() => {
     if (searchQuery.length > 0) {
@@ -105,10 +113,12 @@ const Header = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for anime" 
             />
+            <button type="submit" onClick={handleClearSearch} ><FaTimes/></button>
           </div>
-          {searchResults.length > 0 && location.pathname === "/search-results" && (
+          {searchResults.length > 0 && location.pathname === "/search-results" && mangaResults.length > 0 &&(
             <div className="search-results position-absolute w-100 bg-white">
               <h2><FaSearch/>Search Results</h2>
+              <h3>Anime:</h3>
               <ul className="list-group list-group-flush">
                 {searchResults.map((anime) => (
                   <li key={anime.id} className="list-group-item">
@@ -127,6 +137,26 @@ const Header = () => {
                   </li>
                 ))}
               </ul>
+              <h3>Manga:</h3>
+              <ul className="list-group list-group-flush">
+                {mangaResults.map((manga) => (
+                  <li key={manga.id} className="list-group-item">
+                    <Link to={`/manga/${manga.id}`} onClick={handleLinkClick}>
+                      <div className="d-flex align-items-center">
+                        <img src={manga.attributes.posterImage.small} alt={manga.attributes.canonicalTitle} width="50" height="70" />
+                        <div className="ml-2">
+                          <div className="font-weight-bold">
+                            {manga.attributes.canonicalTitle.length > 20
+                              ? `${manga.attributes.canonicalTitle.slice(0, 20)}...`
+                              : manga.attributes.canonicalTitle}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              
             </div>
           )}
         </form>
@@ -137,3 +167,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

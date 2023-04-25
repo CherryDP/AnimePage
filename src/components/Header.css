@@ -133,6 +133,9 @@ nav {
     max-height: 0px;
     border-radius: 5px;
     padding: 1px;
+    right: auto;
+    left: auto;
+    transform: translateX(-30%);
   }
   
   .search-results h2 {
@@ -152,3 +155,4 @@ nav {
   .search-results img {
     margin-right: 10px;
   }
+ 
