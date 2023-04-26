@@ -24,9 +24,12 @@ const Filter = () => {
   }, []);
 
   const generateColor = () => {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    const red = Math.floor(Math.random() * 200);
+    const green = Math.floor(Math.random() * 200);
+    const blue = Math.floor(Math.random() * 200);
+    const randomColor = (red << 16 | green << 8 | blue).toString(16);
     return "#" + randomColor;
-  };
+    };
 
   return (
     <div>
