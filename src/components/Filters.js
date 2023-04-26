@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Filter.css";
-
+//
 const Filter = () => {
   const [genres, setGenres] = useState([]);
   const [mangaGenres, setMangaGenres] = useState([]);
