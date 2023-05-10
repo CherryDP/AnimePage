@@ -36,7 +36,7 @@ const Home = () => {
     const fetchTopRated = async () => {
       try {
         const response = await axios.get(
-          "https://kitsu.io/api/edge/anime?sort=-averageRating&page[limit]=20"
+          "https://kitsu.io/api/edge/anime?sort=-averageRating&page"
         );
         setTopRated(response.data.data.slice(0, 5));
       } catch (error) {

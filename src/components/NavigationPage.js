@@ -113,7 +113,7 @@ const Header = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for anime" 
             />
-            <button type="submit" onClick={handleClearSearch} ><FaTimes/></button>
+            <Link to="/"><button type="submit" onClick={handleClearSearch} ><FaTimes/></button></Link>
           </div>
           {searchResults.length > 0 && location.pathname === "/search-results" && mangaResults.length > 0 &&(
             <div className="search-results position-absolute w-100 bg-white">
